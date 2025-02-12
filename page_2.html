@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14/02/2568</title>
+    <link rel="icon" type="image/png" href="heart.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="Contect1">
+        <img id="box" src="box.png" alt="Closed Box">
+    </div>
+    <div class="Contect2">
+        <img id="open_box" src="open-box.png" alt="Open Box" style="display:none;">
+    </div>
+    <audio id="clickSound_openBox" src="open-package-box-parcel-100334.mp3"></audio>
+
+    <div class="Contect3">
+        <img id="letter" src="postcard.png" style="display:none;">
+        <img id="gift" src="gift.png" style="display:none;">
+    </div>
+
+    <div class="Character">
+        <img id="girl" src="girl.png">
+    </div>
+    <div class="box_chat">
+       <p class="chat">ดูเหมือนว่าจะมีของขวัญมาส่งให้เธอน๊ะ ลองเเกะเยยมั้ย</p>
+    </div>
+
+    <div class="box_chat_2">
+        <p id="chat_2" style="display: none;">อุ๊ยมีจดหมายด้วย เขียนว่าอะไรกันน๊ะ</p>
+     </div>
+
+ 
+
+    <audio id="bgMusic" loop>
+        <source src="เพลงรัก.MP3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        var audio = document.getElementById("bgMusic");
+        var OpenBox = document.getElementById("box");
+        var letter = document.getElementById("letter");  // แก้เป็น 'letter' 
+        var openBoxImage = document.getElementById("open_box");  // ใช้ 'open_box'
+        var clickSound_openBox = document.getElementById("clickSound_openBox");
+        var gift = document.getElementById("gift");
+        var chat_2 = document.getElementById("chat_2")
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log("เพลงเริ่มเล่นอัตโนมัติ!");
+                }).catch(error => {
+                    console.log("Autoplay ถูกบล็อก! ต้องให้ผู้ใช้กดปุ่มก่อน");
+                });
+            }
+        });
+
+        OpenBox.addEventListener("click", function () {
+            clickSound.currentTime = 0; // เล่นเสียง pop
+            clickSound.play();
+
+            // ซ่อนกล่องที่ปิดและแสดงกล่องที่เปิด
+            OpenBox.style.display = "none";  // ซ่อนกล่องปิด
+            openBoxImage.style.display = "block";  // แสดงกล่องเปิด
+
+            // หน่วงเวลา 1 วินาทีเพื่อให้กล่องเปิดแสดงก่อน
+            setTimeout(() => {
+                letter.style.display = "block";  // แสดงข้อความ
+                gift.style.display = "block";
+                chat_2.style.display = "block";
+            }, 1000);
+        });
+    </script>
+
+</body>
+</html>
